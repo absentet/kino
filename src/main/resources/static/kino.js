@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hentBillett();
 
     function kjopBillett() {
+        console.log("start")
         const film = document.getElementById('filmer').value;
         const antall = document.getElementById('antall').value;
         const fornavn = document.getElementById('fornavn').value;
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         const billett = { film, antall, fornavn, etternavn, telefonnr, epost };
-
+        console.log("trying to fetch")
         fetch('/api/billetter', {
             method: 'POST',
             headers: {
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(() => {
                 visBilletter();
                 blankUtFelter();
+                console.log("nå skal alt ha skjedd")
             })
             .catch(error => console.error('Error:', error));
     }
@@ -77,14 +79,16 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(billetter => {
                 const liste = document.getElementById('billettListe');
                 liste.innerHTML = ''; // Clear existing rows
+                console.log(billetter)
                 billetter.forEach(billett => {
                     const tr = document.createElement('tr');
-                    tr.innerHTML = <td>${billett.film}</td>
-                    <td>${billett.antall}</td>
-                    <td>${billett.fornavn}</td>
-                    <td>${billett.etternavn}</td>
-                    <td>${billett.telefonnr}</td>
-                    <td>${billett.epost}</td>
+                    tr.innerHTML =
+                        `<td>${billett.film}</td>\
+                        <td>${billett.antall}</td>\
+                        <td>${billett.fornavn}</td>\
+                        <td>${billett.etternavn}</td>\
+                        <td>${billett.telefonnr}</td>\
+                        <td>${billett.epost}</td>`
                     ;
                     liste.appendChild(tr);
                 });
@@ -102,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function slettAlleBilletter() {
+        console.log("hei hei")
         fetch('/api/billetter', { method: 'DELETE' })
             .then(() => {
                 visBilletter();

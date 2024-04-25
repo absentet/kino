@@ -28,6 +28,10 @@ public class Billett {
         this.epost = epost;
     }
 
+    public Billett() {
+
+    }
+
     public Long getId() {
         return id;
     }
