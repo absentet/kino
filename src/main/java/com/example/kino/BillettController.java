@@ -16,21 +16,18 @@ public class BillettController {
     @PostMapping
     public ResponseEntity<Billett> createBillett(@RequestBody Billett billett) {
         Billett savedBillett = billettRepo.save(billett);
-        System.out.println("hello:");
         return new ResponseEntity<>(savedBillett, HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<Billett>> getAllBilletter() {
         List<Billett> sortedBilletter = billettRepo.findAllByOrderByEtternavnAsc();
-        System.out.println("hello:");
         return new ResponseEntity<>(sortedBilletter, HttpStatus.OK);
     }
 
     @DeleteMapping
     public ResponseEntity<Void> deleteAllBilletter() {
         billettRepo.deleteAll();
-        System.out.println("hello:");
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
